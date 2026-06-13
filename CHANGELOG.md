@@ -5,6 +5,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Changed
+
+- Documentation reframed to be application-agnostic; removed product-specific framing so the
+  standard reads as general-purpose source verification for any citation pipeline (RAG,
+  research tools, answer engines, content generators).
+- Fixed the repository, homepage, issues, and CI badge URLs to point at the `SottoFM` org.
+
 ## [0.3.0] - 2026-03-01
 
 ### Added

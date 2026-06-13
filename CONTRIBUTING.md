@@ -35,7 +35,7 @@ add new domains, fix misclassifications, and catch cases we haven't thought of.
 ## Development Setup
 
 ```bash
-git clone https://github.com/your-org/reference-verification-standard.git
+git clone https://github.com/SottoFM/reference-verification-standard.git
 cd reference-verification-standard
 npm install
 
@@ -219,4 +219,4 @@ These guide every decision in the standard:
 
 Open an issue or start a discussion. We're happy to help guide contributions.
 
-Built by the Sotto project for private podcast infrastructure.
+Built and maintained by the Sotto project as an open, application-agnostic standard.

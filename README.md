@@ -4,7 +4,7 @@
 
 **The open, domain-aware reference verification standard.**
 
-[![CI](https://github.com/your-org/reference-verification-standard/actions/workflows/ci.yml/badge.svg)](https://github.com/your-org/reference-verification-standard/actions/workflows/ci.yml)
+[![CI](https://github.com/SottoFM/reference-verification-standard/actions/workflows/ci.yml/badge.svg)](https://github.com/SottoFM/reference-verification-standard/actions/workflows/ci.yml)
 [![npm](https://img.shields.io/npm/v/@sotto/verification-standard?color=D97706)](https://www.npmjs.com/package/@sotto/verification-standard)
 [![License: MIT](https://img.shields.io/badge/License-MIT-1E3A5F.svg)](LICENSE)
 [![TypeScript](https://img.shields.io/badge/TypeScript-strict-1E3A5F)](https://www.typescriptlang.org/)
@@ -30,7 +30,7 @@ This is broken for anything that isn't an academic paper. DOI and academic title
 are irrelevant for a New York Times article — which means a live, credible Reuters story
 scores **at most 0.23** against a 0.65 threshold and is always marked as removed.
 
-News podcasts silently end up with zero references.
+News sources silently end up with zero references.
 
 ## The Fix
 
@@ -453,17 +453,17 @@ The standard has zero runtime dependencies. Pure TypeScript — works in any JS 
 
 ---
 
-## Used by Sotto
+## Where this is used
 
-This package is the scoring engine behind Sotto, open-source private podcast infrastructure
-where AI generates multi-voice podcasts from any topic.
+This standard is application-agnostic. Any tool that cites web sources, including RAG
+pipelines, research assistants, search and answer engines, and content generators, can use it
+to verify references and attach a domain-aware trust badge (Academic, News, Government,
+Educational, or General) to every citation.
 
-Every reference cited in a Sotto podcast is verified using this standard. The domain badge
-(Academic / News / Government / General) and verification status visible in the podcast player
-are computed entirely from the logic in this repository.
-
-When this standard improves — via community PRs — Sotto benefits automatically by
-updating its submodule reference.
+It is maintained as a standalone, dependency-free package by the Sotto project, which consumes
+it as a submodule. Every reference Sotto surfaces is scored by the logic in this repository,
+and when the standard improves via community PRs, any consumer benefits by updating its
+reference.
 
 ---
 
@@ -471,24 +471,24 @@ updating its submodule reference.
 
 ### The Problem
 
-AI podcast scripts can inadvertently reflect a single political perspective when the source
-material fed into generation is ideologically one-sided. A script built entirely from sources
-rated "Left" by media-bias researchers will skew its framing, word choice, and which facts
-it emphasises — even if every cited reference passes verification.
+AI-generated content can inadvertently reflect a single political perspective when the source
+material fed into generation is ideologically one-sided. Output built entirely from sources
+rated "Left" by media-bias researchers will skew its framing, word choice, and which facts it
+emphasises, even if every cited reference passes verification.
 
-**Concrete example:** A podcast about immigration policy sourced exclusively from outlets
-rated Left-Center produces accurate but one-sided content. Every URL resolves (✅ VERIFIED),
-yet a listener expecting balanced treatment is misled. Reference verification alone cannot
-catch this — it is orthogonal to the question of ideological balance.
+**Concrete example:** A generated explainer on immigration policy sourced exclusively from
+outlets rated Left-Center produces accurate but one-sided content. Every URL resolves
+(✅ VERIFIED), yet a reader expecting balanced treatment is misled. Reference verification
+alone cannot catch this; it is orthogonal to the question of ideological balance.
 
 ### Approach
 
 Static media-bias lookup at **content-extraction time**, not at verification time.
 
-The lookup runs once per source URL when content is first extracted, before the script is
-generated. It annotates the extraction context with bias metadata. The script-generation
-prompt then receives conditional guidance — only when the topic is political — to seek
-balance or flag one-sidedness to the user.
+The lookup runs once per source URL when content is first extracted, before generation runs.
+It annotates the extraction context with bias metadata. The generation prompt then receives
+conditional guidance, only when the topic is political, to seek balance or flag one-sidedness
+to the user.
 
 This keeps bias detection cleanly separated from reference verification: the verification
 standard scores whether a reference is real; bias metadata informs whether the generation
@@ -515,7 +515,7 @@ Source URLs (from content extraction)
      ▼               ▼
   Inject bias     No bias
   guidance into   guidance
-  script-gen      injected
+  generation      injected
   prompt
 ```
 
@@ -533,8 +533,8 @@ Bias categories surfaced per source:
 | `fake-news` | Known misinformation outlet |
 
 When all detected sources share the same non-center rating and the topic is political, the
-script-generation prompt is augmented with guidance to note the ideological lean to the
-listener and, where possible, incorporate contrasting framing.
+generation prompt is augmented with guidance to note the ideological lean to the
+reader and, where possible, incorporate contrasting framing.
 
 ### Data Source
 
@@ -551,9 +551,9 @@ No network call is made at generation time. The dataset is bundled as a static J
 ### What This Does NOT Do
 
 - **Does not reject sources.** A source rated `right` or `left` is not excluded from the
-  script. The verification standard continues to assess whether the reference is real.
+  output. The verification standard continues to assess whether the reference is real.
 - **Does not editorialize.** The system does not label content "biased" to the end user
-  unprompted. Guidance is injected into the generation prompt, not the podcast transcript.
+  unprompted. Guidance is injected into the generation prompt, not the generated output.
 - **Does not apply to non-political topics.** Technology tutorials, science explainers,
   cooking guides — bias guidance is suppressed entirely when political topic detection
   returns negative.
