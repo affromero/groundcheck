@@ -1,5 +1,5 @@
 {
-  "name": "@sotto/verification-standard",
+  "name": "groundcheck",
   "version": "0.3.0",
   "description": "Open, domain-aware reference verification standard for academic, news, government, educational, and general sources",
   "keywords": [
@@ -13,13 +13,13 @@
     "rag",
     "open-standard"
   ],
-  "homepage": "https://github.com/SottoFM/reference-verification-standard#readme",
+  "homepage": "https://github.com/affromero/groundcheck#readme",
   "bugs": {
-    "url": "https://github.com/SottoFM/reference-verification-standard/issues"
+    "url": "https://github.com/affromero/groundcheck/issues"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/SottoFM/reference-verification-standard.git"
+    "url": "https://github.com/affromero/groundcheck.git"
   },
   "license": "MIT",
   "author": "Sotto <hello@example.com>",

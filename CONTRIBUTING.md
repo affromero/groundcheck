@@ -1,4 +1,4 @@
-# Contributing to the Sotto Open Verification Standard
+# Contributing to groundcheck
 
 Thank you for helping make citation verification fairer and more transparent.
 This standard is intentionally public so the community can improve it — adjust weights,
@@ -35,8 +35,8 @@ add new domains, fix misclassifications, and catch cases we haven't thought of.
 ## Development Setup
 
 ```bash
-git clone https://github.com/SottoFM/reference-verification-standard.git
-cd reference-verification-standard
+git clone https://github.com/affromero/groundcheck.git
+cd groundcheck
 npm install
 
 # Run tests
@@ -219,4 +219,4 @@ These guide every decision in the standard:
 
 Open an issue or start a discussion. We're happy to help guide contributions.
 
-Built and maintained by the Sotto project as an open, application-agnostic standard.
+Built and maintained by [Andres Romero](https://github.com/affromero) as an open, application-agnostic standard.

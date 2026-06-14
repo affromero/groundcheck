@@ -9,10 +9,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- Renamed the package to `groundcheck` and moved the repository to `affromero/groundcheck`,
+  repositioning it as a general-purpose citation/grounding verification library for AI agents.
 - Documentation reframed to be application-agnostic; removed product-specific framing so the
   standard reads as general-purpose source verification for any citation pipeline (RAG,
   research tools, answer engines, content generators).
-- Fixed the repository, homepage, issues, and CI badge URLs to point at the `SottoFM` org.
 
 ## [0.3.0] - 2026-03-01
 
@@ -61,6 +62,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - GOVERNMENT: url(0.40) + ai(0.60) ≥ 0.55
   - GENERAL: url(0.30) + title_search(0.10) + ai(0.60) ≥ 0.55
 
-[0.3.0]: https://github.com/your-org/reference-verification-standard/releases/tag/v0.3.0
-[0.2.0]: https://github.com/your-org/reference-verification-standard/releases/tag/v0.2.0
-[0.1.0]: https://github.com/your-org/reference-verification-standard/releases/tag/v0.1.0
+[0.3.0]: https://github.com/affromero/groundcheck/releases/tag/v0.3.0
+[0.2.0]: https://github.com/affromero/groundcheck/releases/tag/v0.2.0
+[0.1.0]: https://github.com/affromero/groundcheck/releases/tag/v0.1.0

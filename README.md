@@ -1,11 +1,11 @@
 <div align="center">
 
-# @sotto/verification-standard
+# groundcheck
 
 **The open, domain-aware reference verification standard.**
 
-[![CI](https://github.com/SottoFM/reference-verification-standard/actions/workflows/ci.yml/badge.svg)](https://github.com/SottoFM/reference-verification-standard/actions/workflows/ci.yml)
-[![npm](https://img.shields.io/npm/v/@sotto/verification-standard?color=D97706)](https://www.npmjs.com/package/@sotto/verification-standard)
+[![CI](https://github.com/affromero/groundcheck/actions/workflows/ci.yml/badge.svg)](https://github.com/affromero/groundcheck/actions/workflows/ci.yml)
+[![npm](https://img.shields.io/npm/v/groundcheck?color=D97706)](https://www.npmjs.com/package/groundcheck)
 [![License: MIT](https://img.shields.io/badge/License-MIT-1E3A5F.svg)](LICENSE)
 [![TypeScript](https://img.shields.io/badge/TypeScript-strict-1E3A5F)](https://www.typescriptlang.org/)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-16A34A.svg)](CONTRIBUTING.md)
@@ -56,7 +56,7 @@ GENERAL    →  url(0.30) + title_search(0.10) + ai(0.60)              ≥ 0.55
 ## Quick Start
 
 ```bash
-npm install @sotto/verification-standard
+npm install groundcheck
 ```
 
 ```ts
@@ -64,7 +64,7 @@ import {
   classifyReference,
   computeDomainAwareScore,
   DOMAIN_CONFIGS,
-} from '@sotto/verification-standard';
+} from 'groundcheck';
 
 // Step 1: classify the reference
 const domain = classifyReference({
@@ -460,10 +460,10 @@ pipelines, research assistants, search and answer engines, and content generator
 to verify references and attach a domain-aware trust badge (Academic, News, Government,
 Educational, or General) to every citation.
 
-It is maintained as a standalone, dependency-free package by the Sotto project, which consumes
-it as a submodule. Every reference Sotto surfaces is scored by the logic in this repository,
-and when the standard improves via community PRs, any consumer benefits by updating its
-reference.
+It is maintained as a standalone, dependency-free package by
+[Andres Romero](https://github.com/affromero). [Sotto](https://sotto.fm) is one consumer,
+vendoring it as a submodule so every reference it surfaces is scored by the logic here. When
+the standard improves via community PRs, any consumer benefits by updating its dependency.
 
 ---
 
