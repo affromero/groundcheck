@@ -1,5 +1,5 @@
 ---
-name: Proposal — weight / threshold / domain change
+name: Proposal: weight / threshold / domain change
 about: Propose a change to scoring weights, thresholds, or domain detection
 title: '[PROPOSAL] '
 labels: proposal

@@ -28,11 +28,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- `computeBayesianScore()` — v2 Bayesian log-odds scoring with per-layer sensitivity/specificity
+- `computeBayesianScore()`: v2 Bayesian log-odds scoring with per-layer sensitivity/specificity
 - `LayerBayesianParams` type: `{ sensitivity, specificity }` per layer
 - `BayesianLayerConfig` type: extends `LayerConfig` with `bayesian` field
-- `prior` field on `DomainConfig` — P(reference is real | domain)
-- `bayesianThreshold` field on `DomainConfig` — minimum posterior to VERIFY
+- `prior` field on `DomainConfig`: P(reference is real | domain)
+- `bayesianThreshold` field on `DomainConfig`: minimum posterior to VERIFY
 - Domain priors: ACADEMIC=0.72, NEWS=0.75, GOVERNMENT=0.82, GENERAL=0.45
 - Bayesian thresholds: ACADEMIC=0.82, NEWS=0.65, GOVERNMENT=0.72, GENERAL=0.68
 - 17 new Bayesian tests (126 total)
@@ -50,10 +50,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Initial release of the Sotto Open Verification Standard
-- `classifyReference()` — classify a reference into ACADEMIC, NEWS, GOVERNMENT, or GENERAL domain
-- `computeDomainAwareScore()` — compute a weighted verification score against a domain's threshold
-- `DOMAIN_CONFIGS` — full domain configuration map with layers, weights, thresholds, and AI instructions
+- Initial release of the domain-aware reference verification standard
+- `classifyReference()`: classify a reference into ACADEMIC, NEWS, GOVERNMENT, or GENERAL domain
+- `computeDomainAwareScore()`: compute a weighted verification score against a domain's threshold
+- `DOMAIN_CONFIGS`: full domain configuration map with layers, weights, thresholds, and AI instructions
 - TypeScript types: `ContentDomain`, `LayerId`, `LayerResult`, `LayerConfig`, `DomainConfig`
 - Comprehensive test suite (classify, score, domains)
 - Domain scoring formulas:

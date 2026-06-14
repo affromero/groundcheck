@@ -36,7 +36,7 @@ jobs:
         run: npm run build
 
       - name: Publish to npm
-        # Uses npm Trusted Publishing (OIDC) — no NPM_TOKEN secret required.
+        # Uses npm Trusted Publishing (OIDC); no NPM_TOKEN secret required.
         # Configure at: npmjs.com → package settings → Trusted Publishers
         # Add GitHub publisher: owner=affromero repo=groundcheck workflow=release.yml
         run: npm publish --access public --provenance

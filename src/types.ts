@@ -6,7 +6,7 @@ export type LayerId = 'doi' | 'title_search' | 'url' | 'ai';
 export interface LayerResult {
   layerId: LayerId;
   passed: boolean;
-  confidence: number; // 0.0–1.0
+  confidence: number; // 0.0 to 1.0
 }
 
 // ── Weighted-sum layer config (v1 scoring) ────────────────────────────────────
@@ -26,19 +26,19 @@ export interface LayerConfig {
  * specificity  = P(layer fails  | reference is fake)
  *
  * These define two likelihood ratios:
- *   LR+ = sensitivity / (1 - specificity)   — evidence in favour of real
- *   LR- = (1 - sensitivity) / specificity   — evidence in favour of fake
+ *   LR+ = sensitivity / (1 - specificity)   // evidence in favour of real
+ *   LR- = (1 - sensitivity) / specificity   // evidence in favour of fake
  *
  * A continuous confidence c ∈ [0,1] contributes:
- *   Δ log-odds = c × ln(LR+) + (1-c) × ln(LR-)
+ *   delta log-odds = c * ln(LR+) + (1-c) * ln(LR-)
  *
  * c = 1.0 → full positive evidence
  * c = 0.5 → uninformative (no update)
  * c = 0.0 → full negative evidence
  */
 export interface LayerBayesianParams {
-  sensitivity: number; // P(pass | real)  — 0.0–1.0
-  specificity: number; // P(fail | fake)  — 0.0–1.0
+  sensitivity: number; // P(pass | real), 0.0 to 1.0
+  specificity: number; // P(fail | fake), 0.0 to 1.0
 }
 
 export interface BayesianLayerConfig extends LayerConfig {
@@ -57,7 +57,7 @@ export interface DomainConfig {
   threshold: number;       // minimum weighted score to VERIFY (v1)
 
   // v2: Bayesian scoring
-  /** P(reference is real | it belongs to this domain) — domain prior */
+  /** P(reference is real | it belongs to this domain). Domain prior. */
   prior: number;
   /** minimum posterior probability to VERIFY (v2) */
   bayesianThreshold: number;

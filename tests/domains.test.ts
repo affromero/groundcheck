@@ -64,7 +64,7 @@ describe('DOMAIN_CONFIGS', () => {
     }
   });
 
-  describe('NEWS domain — lower threshold to handle paywalls', () => {
+  describe('NEWS domain: lower threshold to handle paywalls', () => {
     it('NEWS threshold is 0.50 (not 0.65+)', () => {
       expect(DOMAIN_CONFIGS.NEWS.threshold).toBe(0.50);
     });
@@ -81,7 +81,7 @@ describe('DOMAIN_CONFIGS', () => {
     });
   });
 
-  describe('ACADEMIC domain — strictest standard', () => {
+  describe('ACADEMIC domain: strictest standard', () => {
     it('ACADEMIC threshold is the highest at 0.70', () => {
       const thresholds = Object.values(DOMAIN_CONFIGS).map((c) => c.threshold);
       expect(DOMAIN_CONFIGS.ACADEMIC.threshold).toBe(Math.max(...thresholds));
@@ -105,7 +105,7 @@ describe('DOMAIN_CONFIGS', () => {
     });
   });
 
-  describe('GENERAL domain — highest scrutiny', () => {
+  describe('GENERAL domain: highest scrutiny', () => {
     it('GENERAL prior is the lowest (most skeptical)', () => {
       const priors = Object.values(DOMAIN_CONFIGS).map((c) => c.prior);
       expect(DOMAIN_CONFIGS.GENERAL.prior).toBe(Math.min(...priors));

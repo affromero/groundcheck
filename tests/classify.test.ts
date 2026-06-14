@@ -86,7 +86,7 @@ describe('classifyReference', () => {
     });
 
     it('classifies ARTICLE type as NEWS (ARTICLE is in NEWS typePatterns)', () => {
-      // ARTICLE is in NEWS typePatterns — type fallback correctly maps it to NEWS
+      // ARTICLE is in NEWS typePatterns, type fallback correctly maps it to NEWS
       expect(classifyReference({ type: 'ARTICLE', url: 'https://randomblog.com' })).toBe('NEWS');
     });
   });
@@ -123,11 +123,11 @@ describe('classifyReference', () => {
       expect(classifyReference({ doi: undefined, url: undefined, type: undefined })).toBe('GENERAL');
     });
 
-    it('handles empty string DOI (falsy — falls through to URL)', () => {
+    it('handles empty string DOI (falsy, falls through to URL)', () => {
       expect(classifyReference({ doi: '', url: 'https://reuters.com/article' })).toBe('NEWS');
     });
 
-    it('handles whitespace-only DOI (trimmed — falls through to URL)', () => {
+    it('handles whitespace-only DOI (trimmed, falls through to URL)', () => {
       expect(classifyReference({ doi: '  ', url: 'https://reuters.com/article' })).toBe('NEWS');
     });
 
@@ -156,9 +156,9 @@ describe('classifyReference', () => {
     });
 
     it('does not match govtrack.us (gov in subdomain, not TLD)', () => {
-      // govtrack.us doesn't contain .gov\b — the \b is after "gov" in the domain
+      // govtrack.us doesn't contain .gov\b, the \b is after "gov" in the domain
       const result = classifyReference({ url: 'https://www.govtrack.us/congress' });
-      // govtrack.us doesn't match \.gov\b — no false positive
+      // govtrack.us doesn't match \.gov\b, no false positive
       expect(result).not.toBe('GOVERNMENT');
     });
   });

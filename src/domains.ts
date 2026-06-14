@@ -211,7 +211,7 @@ export const DOMAIN_CONFIGS: Record<ContentDomain, DomainConfig> = {
       },
     ],
     threshold: 0.55,
-    // Prior: catch-all domain — higher fabrication risk than structured domains.
+    // Prior: catch-all domain; higher fabrication risk than structured domains.
     prior: 0.45,
     bayesianThreshold: 0.68,
     aiInstruction:

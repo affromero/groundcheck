@@ -51,7 +51,7 @@ describe('computeBayesianScore', () => {
     });
   });
 
-  describe('NEWS domain — the core fix', () => {
+  describe('NEWS domain: the core fix', () => {
     it('verifies a live credible news article (URL 200 + strong AI)', () => {
       const { posterior, verdict } = computeBayesianScore('NEWS', [
         { layerId: 'url', passed: true, confidence: 0.8 },
@@ -145,9 +145,9 @@ describe('computeBayesianScore', () => {
 
   describe('uninformative layers', () => {
     it('absent layers produce the same result as explicit c=0.5 inputs', () => {
-      // Missing layers default to c=0.5 — identical to passing them explicitly.
+      // Missing layers default to c=0.5, identical to passing them explicitly.
       // Note: c=0.5 is only truly zero-update when sensitivity === 1-specificity.
-      // With our actual params (LR+ ≠ LR-^-1), there is still a net shift — but both
+      // With our actual params (LR+ != LR-^-1), there is still a net shift, but both
       // representations should agree.
       const withExplicit = computeBayesianScore('NEWS', [
         { layerId: 'url', passed: true, confidence: 0.5 },
@@ -258,7 +258,7 @@ describe('computeBayesianScore', () => {
         { layerId: 'ai', passed: true, confidence: 0.9 },
         { layerId: 'doi' as LayerId, passed: true, confidence: 1.0 },
       ]);
-      // NEWS config has no doi layer — extra result ignored
+      // NEWS config has no doi layer, extra result ignored
       expect(withExtra.posterior).toBeCloseTo(baseline.posterior, 10);
     });
   });

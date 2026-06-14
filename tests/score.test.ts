@@ -31,13 +31,13 @@ describe('computeDomainAwareScore', () => {
       const { score, verdict } = computeDomainAwareScore('ACADEMIC', [
         { layerId: 'doi', passed: true, confidence: 1.0 },
       ]);
-      // Only doi contributes: 0.45 * 1.0 = 0.45 — below 0.70 threshold
+      // Only doi contributes: 0.45 * 1.0 = 0.45, below 0.70 threshold
       expect(score).toBeCloseTo(0.45, 2);
       expect(verdict).toBe('FAILED');
     });
   });
 
-  describe('NEWS domain — the core fix', () => {
+  describe('NEWS domain: the core fix', () => {
     it('verifies a live NYT article (URL 200 + credible AI)', () => {
       const { score, verdict } = computeDomainAwareScore('NEWS', [
         { layerId: 'url', passed: true, confidence: 0.6 },
@@ -48,7 +48,7 @@ describe('computeDomainAwareScore', () => {
       expect(verdict).toBe('VERIFIED');
     });
 
-    it('verifies a paywalled article (403 + credible AI) — paywall should not cause REMOVED', () => {
+    it('verifies a paywalled article (403 + credible AI), paywall should not cause REMOVED', () => {
       const { score, verdict } = computeDomainAwareScore('NEWS', [
         { layerId: 'url', passed: false, confidence: 0 },
         { layerId: 'ai', passed: true, confidence: 0.85 },
@@ -151,7 +151,7 @@ describe('computeDomainAwareScore', () => {
     });
   });
 
-  describe('monotonicity — higher confidence always means higher score', () => {
+  describe('monotonicity: higher confidence always means higher score', () => {
     for (const domain of ['ACADEMIC', 'NEWS', 'GOVERNMENT', 'EDUCATIONAL', 'GENERAL'] as const) {
       it(`${domain}: raising all confidences raises the score`, () => {
         const low = computeDomainAwareScore(domain, [
@@ -167,7 +167,7 @@ describe('computeDomainAwareScore', () => {
     }
   });
 
-  describe('boundary — verdict flips at threshold', () => {
+  describe('boundary: verdict flips at threshold', () => {
     it('NEWS: score exactly at 0.50 threshold is VERIFIED', () => {
       // 0.35*0 + 0.65*ai_c = 0.50 → ai_c = 0.50/0.65
       const { score, verdict } = computeDomainAwareScore('NEWS', [

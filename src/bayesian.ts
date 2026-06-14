@@ -2,7 +2,7 @@ import type { ContentDomain, LayerResult } from './types';
 import { DOMAIN_CONFIGS } from './domains';
 
 /**
- * Sigmoid function — maps log-odds back to probability space.
+ * Sigmoid function: maps log-odds back to probability space.
  * σ(x) = 1 / (1 + e^(-x))
  */
 function sigmoid(x: number): number {
@@ -17,17 +17,17 @@ function sigmoid(x: number): number {
  *   prior_log_odds = ln(prior / (1 - prior))
  *
  *   For each applicable layer with confidence c ∈ [0, 1]:
- *     LR+ = sensitivity / (1 - specificity)   — how much a pass shifts belief toward real
- *     LR- = (1 - sensitivity) / specificity   — how much a fail shifts belief toward fake
- *     Δ   = c × ln(LR+) + (1 - c) × ln(LR-)
+ *     LR+ = sensitivity / (1 - specificity)   // how much a pass shifts belief toward real
+ *     LR- = (1 - sensitivity) / specificity   // how much a fail shifts belief toward fake
+ *     delta = c * ln(LR+) + (1 - c) * ln(LR-)
  *
  *   posterior = sigmoid(prior_log_odds + Σ Δ)
  *   verdict   = posterior >= bayesianThreshold ? 'VERIFIED' : 'FAILED'
  *
  * Layers absent from layerResults are treated as minimally informative (c = 0.5).
- * Note: Δ = 0 only when LR+ × LR- = 1 (i.e. sensitivity = 1 - specificity, zero
+ * Note: delta = 0 only when LR+ x LR- = 1 (i.e. sensitivity = 1 - specificity, zero
  * discriminative power). For calibrated layers, c = 0.5 still contributes a small
- * net shift — absent evidence is not the same as no evidence.
+ * net shift; absent evidence is not the same as no evidence.
  *
  * @param domain       - The content domain (ACADEMIC | NEWS | GOVERNMENT | EDUCATIONAL | GENERAL)
  * @param layerResults - Results from each verification layer

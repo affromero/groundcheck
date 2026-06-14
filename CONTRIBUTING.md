@@ -1,7 +1,7 @@
 # Contributing to groundcheck
 
 Thank you for helping make citation verification fairer and more transparent.
-This standard is intentionally public so the community can improve it — adjust weights,
+This standard is intentionally public so the community can improve it: adjust weights,
 add new domains, fix misclassifications, and catch cases we haven't thought of.
 
 ---
@@ -66,7 +66,7 @@ valid sources being verified vs removed. Please include evidence.
 A concrete reference that currently scores incorrectly, with the full breakdown:
 
 ```
-Reference: "Climate change accelerating, UN report says" — Reuters, 2024
+Reference: "Climate change accelerating, UN report says" (Reuters, 2024)
 URL: https://www.reuters.com/climate/... (returns 200)
 AI verdict: REAL (credible outlet, claim supported)
 
@@ -88,13 +88,13 @@ Proposed score (domain-aware NEWS):
 ### Process
 
 1. Open an issue using the **Proposal** template
-2. Include 2–3 concrete examples with score breakdowns
+2. Include 2 to 3 concrete examples with score breakdowns
 3. If it's a threshold change, show what currently passes/fails at the current and proposed threshold
 4. Submit a PR with the change + tests + CHANGELOG entry
 
 ### Bayesian parameters
 
-**Bayesian parameters** — `sensitivity`, `specificity`, and `prior` values are currently
+**Bayesian parameters**: `sensitivity`, `specificity`, and `prior` values are currently
 expert-set heuristics (see `src/domains.ts`). A valuable contribution would be empirically
 calibrating these against a labeled dataset of real vs. hallucinated references.
 
@@ -118,7 +118,7 @@ If you believe a new content type deserves its own scoring model (e.g., `SOCIAL_
 
 - Domain names: `UPPER_SNAKE_CASE` (e.g., `SOCIAL_MEDIA`)
 - Layer IDs: `lower_snake_case` (e.g., `social_graph`)
-- Keep domain names generic — `ACADEMIC` not `PAPER`, `NEWS` not `JOURNALISM`
+- Keep domain names generic: `ACADEMIC` not `PAPER`, `NEWS` not `JOURNALISM`
 
 ---
 
@@ -140,7 +140,7 @@ urlPatterns: [
 - Use `\b` word boundaries to avoid partial matches (e.g., `/\bnpr\.org\b/` not `/npr\.org/`)
 - Include both `www` and non-`www` variants if they differ (most regex patterns handle this with `\b`)
 - Use `\.` to escape dots in domain names
-- Prefer specific patterns over broad ones — `\bnytimes\.com\b` not `\bnyt/`
+- Prefer specific patterns over broad ones: `\bnytimes\.com\b` not `\bnyt/`
 - Include both `.com` and country TLDs where relevant (e.g., `\bbbc\.(com|co\.uk)\b`)
 - Test your pattern manually: `console.log(/\byourpattern\.com\b/.test('https://www.yourpattern.com/article'))`
 
@@ -195,22 +195,22 @@ it('computeDomainAwareScore works', ...)
 
 These guide every decision in the standard:
 
-1. **Domain-aware, not one-size-fits-all** — A Reuters article and a Nature paper need different
+1. **Domain-aware, not one-size-fits-all.** A Reuters article and a Nature paper need different
    verification criteria. Never apply academic standards to news.
 
-2. **Paywalls are not fabrications** — A URL returning 403 from a known outlet is evidence of
+2. **Paywalls are not fabrications.** A URL returning 403 from a known outlet is evidence of
    a real article, not a fake one. The AI layer must carry enough weight to verify paywalled content.
 
-3. **AI confidence is capped** — The maximum AI confidence contribution is 0.85 (not 1.0). No
+3. **AI confidence is capped.** The maximum AI confidence contribution is 0.85 (not 1.0). No
    single layer should be able to single-handedly verify a reference at maximum confidence.
 
-4. **Err toward verification for credible sources, rejection for anonymous ones** — For established
+4. **Err toward verification for credible sources, rejection for anonymous ones.** For established
    outlets (NYT, Nature, CDC), the standard leans REAL. For anonymous blogs, it leans REMOVED.
 
-5. **Transparency** — Every verification score is explainable: layer × weight = contribution.
+5. **Transparency.** Every verification score is explainable: layer x weight = contribution.
    No black boxes.
 
-6. **Weights must sum to 1.0** — Every domain's layers must sum to exactly 1.0. This keeps
+6. **Weights must sum to 1.0.** Every domain's layers must sum to exactly 1.0. This keeps
    scores interpretable as fractions of the maximum possible confidence.
 
 ---

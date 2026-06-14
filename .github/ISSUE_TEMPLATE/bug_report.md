@@ -33,4 +33,4 @@ What actually happened, with the score breakdown if relevant.
 
 ## Additional context
 
-Any other context — link to the source, why the classification matters, etc.
+Any other context: link to the source, why the classification matters, etc.

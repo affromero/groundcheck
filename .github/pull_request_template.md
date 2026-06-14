@@ -12,7 +12,7 @@
 
 | Domain | Before | After | Net effect |
 |--------|--------|-------|------------|
-| NEWS | url(0.35) + ai(0.65), threshold 0.50 | — | — |
+| NEWS | url(0.35) + ai(0.65), threshold 0.50 | (fill in) | (fill in) |
 
 ## Test cases added
 
