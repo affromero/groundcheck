@@ -52,7 +52,7 @@ npm run typecheck
 npm run build
 ```
 
-**Requirements**: Node.js 18+, npm 8+
+**Requirements**: Node.js 22.12+
 
 ---
 
