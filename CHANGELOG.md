@@ -5,9 +5,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## [0.4.0] - 2026-08-17
 
 ### Changed
+
+- **Breaking:** the generic `WEB` reference type no longer classifies as `NEWS`
+  (or `GOVERNMENT`) in the type fallback — bare web references now fall through
+  to `EDUCATIONAL`. A generic web type carries no news signal, and routing it to
+  NEWS subjected ordinary web sources to the "credible news outlet" AI
+  instruction, failing genuine educational/institutional pages. NEWS and
+  GOVERNMENT are now assigned only by URL pattern or a specific type
+  (`ARTICLE` / `REPORT`).
 
 - Renamed the package to `groundcheck` and moved the repository to `affromero/groundcheck`,
   repositioning it as a general-purpose citation/grounding verification library for AI agents.

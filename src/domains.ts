@@ -83,7 +83,10 @@ export const DOMAIN_CONFIGS: Record<ContentDomain, DomainConfig> = {
     bayesianThreshold: 0.65,
     aiInstruction:
       'Verify this is from a credible news outlet (established newspapers, wire services, broadcasters) and that the cited claim appears in the article. DOI and academic indexing are NOT expected for news. Err toward REAL for known reputable outlets like NYT, Reuters, BBC, AP, Washington Post, Guardian, WSJ, Bloomberg, FT, NPR.',
-    typePatterns: ['ARTICLE', 'WEB'],
+    // No 'WEB': a bare web reference carries no news signal, and routing it
+    // here subjects it to the "credible news outlet" AI instruction. NEWS is
+    // assigned by URL pattern or an explicit ARTICLE type.
+    typePatterns: ['ARTICLE'],
     urlPatterns: [
       /\bnytimes\.com\b/,
       /\bwashingtonpost\.com\b/,
@@ -125,7 +128,9 @@ export const DOMAIN_CONFIGS: Record<ContentDomain, DomainConfig> = {
     bayesianThreshold: 0.72,
     aiInstruction:
       'Verify this is from an official government or intergovernmental source (agency websites, .gov, .gov.uk, UN, WHO, etc.) and that the cited claim is supported by the document. Err toward REAL for official government URLs.',
-    typePatterns: ['REPORT', 'WEB'],
+    // No 'WEB' here either — government is assigned by URL pattern (.gov,
+    // who.int, ...) or an explicit REPORT type, never by a generic web type.
+    typePatterns: ['REPORT'],
     urlPatterns: [
       /\.gov\b/,
       /\.gov\.\w{2}\b/,

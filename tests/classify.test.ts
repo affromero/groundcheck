@@ -89,6 +89,15 @@ describe('classifyReference', () => {
       // ARTICLE is in NEWS typePatterns, type fallback correctly maps it to NEWS
       expect(classifyReference({ type: 'ARTICLE', url: 'https://randomblog.com' })).toBe('NEWS');
     });
+
+    it('classifies bare WEB type as EDUCATIONAL, never NEWS or GOVERNMENT', () => {
+      // A generic web reference carries no news/government signal; those
+      // domains are only assigned by URL pattern or a specific type.
+      expect(classifyReference({ type: 'WEB', url: 'https://lernen.goethe.de/a1.pdf' })).toBe(
+        'EDUCATIONAL'
+      );
+      expect(classifyReference({ type: 'WEB' })).toBe('EDUCATIONAL');
+    });
   });
 
   describe('GENERAL fallback', () => {
