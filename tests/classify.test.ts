@@ -81,8 +81,11 @@ describe('classifyReference', () => {
       expect(classifyReference({ type: 'PAPER', url: 'https://example.com/paper' })).toBe('ACADEMIC');
     });
 
-    it('classifies BOOK type as ACADEMIC', () => {
-      expect(classifyReference({ type: 'BOOK' })).toBe('ACADEMIC');
+    it('classifies DOI-less BOOK type as EDUCATIONAL, not ACADEMIC', () => {
+      // A book with a DOI is ACADEMIC via the DOI rule; without one it cannot
+      // satisfy academic-indexing evidence, so it routes to EDUCATIONAL.
+      expect(classifyReference({ type: 'BOOK' })).toBe('EDUCATIONAL');
+      expect(classifyReference({ type: 'BOOK', doi: '10.1234/real' })).toBe('ACADEMIC');
     });
 
     it('classifies ARTICLE type as NEWS (ARTICLE is in NEWS typePatterns)', () => {

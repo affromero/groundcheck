@@ -43,7 +43,11 @@ export const DOMAIN_CONFIGS: Record<ContentDomain, DomainConfig> = {
     bayesianThreshold: 0.82,
     aiInstruction:
       'Verify the reference is a real academic work (paper, book, report) and that the cited claim is supported by it. Err toward REAL for indexed works.',
-    typePatterns: ['PAPER', 'BOOK', 'REPORT'],
+    // No 'BOOK': a book with a DOI is already ACADEMIC via the DOI rule, and a
+    // DOI-less book cannot satisfy academic-indexing evidence (OpenAlex book
+    // coverage is poor), so the type falls through to EDUCATIONAL instead of
+    // being scored against layers it can never pass.
+    typePatterns: ['PAPER', 'REPORT'],
     urlPatterns: [
       /\bdoi\.org\b/,
       /\barxiv\.org\b/,

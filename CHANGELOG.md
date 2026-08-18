@@ -9,6 +9,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- **Breaking:** the `BOOK` reference type without a DOI no longer classifies as
+  `ACADEMIC` — it falls through to `EDUCATIONAL`. A DOI-less book cannot satisfy
+  academic-indexing evidence (OpenAlex book coverage is poor), so ACADEMIC
+  scoring failed genuine books; a book with a DOI is still ACADEMIC via the DOI
+  rule.
 - **Breaking:** the generic `WEB` reference type no longer classifies as `NEWS`
   (or `GOVERNMENT`) in the type fallback — bare web references now fall through
   to `EDUCATIONAL`. A generic web type carries no news signal, and routing it to
