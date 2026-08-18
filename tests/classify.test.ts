@@ -81,6 +81,20 @@ describe('classifyReference', () => {
       expect(classifyReference({ type: 'PAPER', url: 'https://example.com/paper' })).toBe('ACADEMIC');
     });
 
+    it('classifies DOI-less REPORT type as EDUCATIONAL, not ACADEMIC or GOVERNMENT', () => {
+      // Institutional/instructional reports without a DOI cannot satisfy
+      // academic-indexing evidence, and a bare REPORT type carries no
+      // government signal (GOVERNMENT is URL-pattern-only).
+      expect(classifyReference({ type: 'REPORT' })).toBe('EDUCATIONAL');
+      expect(
+        classifyReference({ type: 'REPORT', url: 'https://www.goethe.de/prf/grm.html' })
+      ).toBe('EDUCATIONAL');
+      expect(classifyReference({ type: 'REPORT', url: 'https://www.cdc.gov/report' })).toBe(
+        'GOVERNMENT'
+      );
+      expect(classifyReference({ type: 'REPORT', doi: '10.1234/real' })).toBe('ACADEMIC');
+    });
+
     it('classifies DOI-less BOOK type as EDUCATIONAL, not ACADEMIC', () => {
       // A book with a DOI is ACADEMIC via the DOI rule; without one it cannot
       // satisfy academic-indexing evidence, so it routes to EDUCATIONAL.

@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- **Breaking:** the type fallback now grants ACADEMIC only to an explicit
+  `PAPER` type, and GOVERNMENT is assigned exclusively by URL pattern. DOI-less
+  `REPORT` references fall through to `EDUCATIONAL`: institutional and
+  instructional reports cannot satisfy academic-indexing evidence, and a bare
+  REPORT type carries no government signal. References with a DOI still
+  classify ACADEMIC via the DOI rule.
 - **Breaking:** the `BOOK` reference type without a DOI no longer classifies as
   `ACADEMIC` — it falls through to `EDUCATIONAL`. A DOI-less book cannot satisfy
   academic-indexing evidence (OpenAlex book coverage is poor), so ACADEMIC

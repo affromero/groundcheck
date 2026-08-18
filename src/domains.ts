@@ -43,11 +43,12 @@ export const DOMAIN_CONFIGS: Record<ContentDomain, DomainConfig> = {
     bayesianThreshold: 0.82,
     aiInstruction:
       'Verify the reference is a real academic work (paper, book, report) and that the cited claim is supported by it. Err toward REAL for indexed works.',
-    // No 'BOOK': a book with a DOI is already ACADEMIC via the DOI rule, and a
-    // DOI-less book cannot satisfy academic-indexing evidence (OpenAlex book
-    // coverage is poor), so the type falls through to EDUCATIONAL instead of
-    // being scored against layers it can never pass.
-    typePatterns: ['PAPER', 'REPORT'],
+    // Only 'PAPER': anything with a DOI is already ACADEMIC via the DOI rule,
+    // and DOI-less BOOKs/REPORTs cannot satisfy academic-indexing evidence
+    // (OpenAlex coverage of books and institutional reports is poor), so those
+    // types fall through to EDUCATIONAL instead of being scored against layers
+    // they can never pass. Only an explicit PAPER claim earns academic scrutiny.
+    typePatterns: ['PAPER'],
     urlPatterns: [
       /\bdoi\.org\b/,
       /\barxiv\.org\b/,
@@ -132,9 +133,9 @@ export const DOMAIN_CONFIGS: Record<ContentDomain, DomainConfig> = {
     bayesianThreshold: 0.72,
     aiInstruction:
       'Verify this is from an official government or intergovernmental source (agency websites, .gov, .gov.uk, UN, WHO, etc.) and that the cited claim is supported by the document. Err toward REAL for official government URLs.',
-    // No 'WEB' here either — government is assigned by URL pattern (.gov,
-    // who.int, ...) or an explicit REPORT type, never by a generic web type.
-    typePatterns: ['REPORT'],
+    // Empty: a bare REPORT/WEB type carries no government signal — GOVERNMENT
+    // is assigned exclusively by URL pattern (.gov, who.int, un.org, ...).
+    typePatterns: [],
     urlPatterns: [
       /\.gov\b/,
       /\.gov\.\w{2}\b/,
@@ -175,7 +176,10 @@ export const DOMAIN_CONFIGS: Record<ContentDomain, DomainConfig> = {
     bayesianThreshold: 0.65,
     aiInstruction:
       'Verify this is from a recognized educational platform, open textbook publisher, curriculum standards body, or MOOC provider, and that the cited claim is supported by the content. Err toward REAL for established educational platforms like Khan Academy, OpenStax, Coursera, edX, CK-12, and curriculum standards bodies like NCTM.',
-    typePatterns: ['WEB', 'VIDEO', 'BOOK'],
+    // REPORT and BOOK land here when no DOI/URL pattern claimed a stronger
+    // domain: instructional reports and unindexed books score sensibly against
+    // educational layers (URL + AI carry the weight, title indexing is mild).
+    typePatterns: ['WEB', 'VIDEO', 'BOOK', 'REPORT'],
     urlPatterns: [
       /\bkhanacademy\.org\b/,
       /\bopenstax\.org\b/,
